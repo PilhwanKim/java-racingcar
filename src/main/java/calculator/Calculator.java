@@ -22,6 +22,6 @@ public class Calculator {
             elementDeque.addResult(result);
         }
 
-        return elementDeque.popOperand().getValue();
+        return elementDeque.getValue();
     }
 }

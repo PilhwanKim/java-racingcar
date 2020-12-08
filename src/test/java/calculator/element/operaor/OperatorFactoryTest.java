@@ -12,26 +12,26 @@ class OperatorFactoryTest {
 
     @Test
     @DisplayName("연산자 문자 키로 연산자들을 잘 찾아오는지 테스트")
-    void getOperatorTest() {
-        Operator operator = OperatorFactory.getOperator("+");
+    void valueOfTest() {
+        Operator operator = OperatorFactory.valueOf("+");
         assertThat(operator).isInstanceOf(Add.class);
 
-        operator = OperatorFactory.getOperator("-");
+        operator = OperatorFactory.valueOf("-");
         assertThat(operator).isInstanceOf(Minus.class);
 
-        operator = OperatorFactory.getOperator("*");
+        operator = OperatorFactory.valueOf("*");
         assertThat(operator).isInstanceOf(Multiply.class);
 
-        operator = OperatorFactory.getOperator("/");
+        operator = OperatorFactory.valueOf("/");
         assertThat(operator).isInstanceOf(Division.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"?", "^", "@",})
     @DisplayName("제공되지 않는 문자 키 입력시 IllegalArgumentException 발생")
-    void getOperatorExceptionTest(String operatorKey) {
+    void valueOfExceptionTest(String operatorKey) {
         assertThatThrownBy(() -> {
-            OperatorFactory.getOperator(operatorKey);
+            OperatorFactory.valueOf(operatorKey);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

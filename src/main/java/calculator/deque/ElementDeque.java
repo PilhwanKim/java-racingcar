@@ -11,28 +11,32 @@ public class ElementDeque {
     Deque<Element> elements = new ArrayDeque<>();
 
     public ElementDeque(String[] splitInput) {
+        if (splitInput == null)
+            throw new IllegalArgumentException("splitInput is null");
+
         for (int index = 0; index < splitInput.length; index++) {
             addElement(splitInput[index], index);
         }
     }
 
-    private void addElement(String elementStr, int index) {
+    private void addElement(String element, int index) {
         if(isOperandPosition(index)) {
-            addOperand(elementStr);
+            addOperand(element);
         } else {
-            addOperator(elementStr);
+            addOperator(element);
         }
     }
 
-    private void addOperand(String elementStr) {
-        int intValue = Integer.parseInt(elementStr);
+    private void addOperand(String element) {
+        int intValue = Integer.parseInt(element);
         elements.addLast(new Operand(intValue));
     }
 
-    private void addOperator(String elementStr) {
-        Operator operator = OperatorFactory.getOperator(elementStr);
+    private void addOperator(String element) {
+        Operator operator = OperatorFactory.valueOf(element);
         elements.addLast(operator);
     }
+
 
     private boolean isOperandPosition(int index) {
         return index % 2 == 0;
@@ -52,6 +56,10 @@ public class ElementDeque {
 
     public boolean isQuitCalculate() {
         return elements.size() <= 1;
+    }
+
+    public int getValue() {
+        return popOperand().getValue();
     }
 
 }

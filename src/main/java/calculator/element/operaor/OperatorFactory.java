@@ -17,7 +17,7 @@ public class OperatorFactory {
         return operatorMap.containsKey(operatorKey);
     }
 
-    public static Operator getOperator(String operatorKey) {
+    public static Operator valueOf(String operatorKey) {
         if(! isOperator(operatorKey)) {
             throw new IllegalArgumentException("사칙 연산에 해당하지 않은 연산자입니다.");
         }
